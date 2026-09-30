@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Players Performance Dashboard</title>
+<link rel="stylesheet" href="player_performace_card.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">⚽</div>
+    <div>
+      <h1>Players Performance Dashboard</h1>
+      <span class="sub">Season overview · updated live</span>
+    </div>
+  </div>
+  <nav class="tabs" id="tabs">
+    <button class="active" data-tab="overview">Overview</button>
+    <button data-tab="stats">Player Stats</button>
+    <button data-tab="match">Match Analysis</button>
+  </nav>
+</header>
+
+<main>
+
+  <section class="stat-row">
+    <div class="stat-card matches">
+      <div class="icon">📋</div>
+      <div>
+        <p class="label">Total Matches</p>
+        <p class="value" id="statMatches">0</p>
+      </div>
+    </div>
+    <div class="stat-card wins">
+      <div class="icon">🏆</div>
+      <div>
+        <p class="label">Wins</p>
+        <p class="value" id="statWins">0</p>
+      </div>
+    </div>
+    <div class="stat-card losses">
+      <div class="icon">✕</div>
+      <div>
+        <p class="label">Losses</p>
+        <p class="value" id="statLosses">0</p>
+      </div>
+    </div>
+    <div class="stat-card rate">
+      <div class="icon">%</div>
+      <div>
+        <p class="label">Win Rate</p>
+        <p class="value" id="statRate">0%</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid-2">
+    <div class="card">
+      <h2><span class="dot"></span>Performance Over Time</h2>
+      <div class="chart-wrap">
+        <canvas id="lineChart" height="260"></canvas>
+      </div>
+    </div>
+    <div class="card">
+      <h2><span class="dot" style="background:var(--loss-red)"></span>Win / Loss Distribution</h2>
+      <div class="chart-wrap">
+        <canvas id="pieChart" height="260"></canvas>
+      </div>
+      <div class="legend">
+        <div class="item"><span class="swatch" style="background:var(--pitch-green)"></span>Wins</div>
+        <div class="item"><span class="swatch" style="background:var(--loss-red)"></span>Losses</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid-2">
+    <div class="card">
+      <h2><span class="dot" style="background:var(--navy)"></span>Player Statistics</h2>
+      <table>
+        <thead>
+          <tr><th>Player</th><th>Matches</th><th>Points</th><th>Win Rate</th><th></th></tr>
+        </thead>
+        <tbody id="playerTableBody"></tbody>
+      </table>
+
+      <form class="add-player-form" id="addPlayerForm" novalidate>
+        <div class="field">
+          <label for="pName">Player name</label>
+          <input type="text" id="pName" placeholder="e.g. Player 3" required>
+        </div>
+        <div class="field">
+          <label for="pMatches">Matches</label>
+          <input type="number" id="pMatches" min="0" step="1" placeholder="0" required>
+        </div>
+        <div class="field">
+          <label for="pPoints">Points</label>
+          <input type="number" id="pPoints" min="0" step="1" placeholder="0" required>
+        </div>
+        <div class="field">
+          <label for="pWinRate">Win rate %</label>
+          <input type="number" id="pWinRate" min="0" max="100" step="1" placeholder="0" required>
+        </div>
+        <div class="submit-wrap">
+          <button type="submit" class="add-btn">Add player</button>
+        </div>
+        <p class="form-error" id="formError"></p>
+      </form>
+    </div>
+    <div class="card">
+      <h2><span class="dot" style="background:var(--amber)"></span>Player Comparison</h2>
+      <div class="chart-wrap">
+        <canvas id="barChart" height="260"></canvas>
+      </div>
+      <div class="legend">
+        <div class="item"><span class="swatch" style="background:#2D6CDF"></span>Player A</div>
+        <div class="item"><span class="swatch" style="background:var(--loss-red)"></span>Player B</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>Players Performance Dashboard — sample data for demonstration</footer>
+</main>
+<script src="player_performance_card.js"></script>
+</body>
+</html>
